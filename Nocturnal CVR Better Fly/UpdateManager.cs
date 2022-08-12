@@ -18,7 +18,7 @@ namespace Nocturnal
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1))
+            if (CVRInputManager.Instance.jump)
                 _flyCount++;
             if (_isFlyng)
             {
