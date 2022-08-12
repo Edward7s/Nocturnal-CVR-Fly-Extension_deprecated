@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nocturnal</RootNamespace>
-    <AssemblyName>Nocturnal CVR Fly Extention</AssemblyName>
+    <AssemblyName>Nocturnal CVR Fly Extention %28Ml%29</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\MelonLoader\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Accessibility" />
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -41,8 +38,27 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="MelonLoader">
-      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\MelonLoader\MelonLoader.dll</HintPath>
+    <Reference Include="MelonLoader, Version=0.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\MelonLoader\MelonLoader\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="SALSA-LipSync, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\SALSA-LipSync.dll</HintPath>
+    </Reference>
+    <Reference Include="ShapesRuntime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\ShapesRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="SteamAudioUnity">
+      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\SteamAudioUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\SteamVR.dll</HintPath>
+    </Reference>
+    <Reference Include="SteamVR_Actions">
+      <HintPath>..\..\..\steam\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\SteamVR_Actions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -255,7 +271,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "A:\steam\steamapps\common\ChilloutVR\Mods" /Y /I
+    <PostBuildEvent>xcopy "$(TargetPath)" "A:\steam\steamapps\common\ChilloutVR\MelonLoader\Mods" /Y /I
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
