@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using ABI_RC.Systems.MovementSystem;
-using ABI_RC.Core.Savior;
 using ABI_RC.Core;
+using ABI.CCK.Components;
+using ABI_RC.Core.Savior;
+using System;
 
 namespace Nocturnal
 {
@@ -14,30 +11,33 @@ namespace Nocturnal
     {
         private float _time { get; set; }
         private int _flyCount { get; set; }
-        private bool _isFlyng { get; set; }
 
+        private bool _isToggled { get; set; } = true;
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1))
+            if (CVRInputManager.Instance.jump && _isToggled)
+            {
+                _isToggled = false;
                 _flyCount++;
-            if (_isFlyng)
+            }
+            else if (!CVRInputManager.Instance.jump) _isToggled = true;
+            if (MovementSystem.Instance.flying)
             {
                 if (Input.GetKey(KeyCode.Q))
-                    RootLogic.Instance.localPlayerRoot.transform.position -= RootLogic.Instance.localPlayerRoot.transform.up / 30;
+                    RootLogic.Instance.localPlayerRoot.transform.position -= RootLogic.Instance.localPlayerRoot.transform.up / (Input.GetKey(KeyCode.LeftShift) ? 20 : 50);
                 if (Input.GetKey(KeyCode.E))
-                    RootLogic.Instance.localPlayerRoot.transform.position += RootLogic.Instance.localPlayerRoot.transform.up / 30;
-
+                    RootLogic.Instance.localPlayerRoot.transform.position += RootLogic.Instance.localPlayerRoot.transform.up / (Input.GetKey(KeyCode.LeftShift) ? 20 : 50);
             }
             if (_flyCount == 0) return;
             _time += Time.smoothDeltaTime;
-            if (_time > 0.7f)
+            if (_time > 0.25f)
             {
                 _flyCount = 0;
                 _time = 0;
+                _isToggled = true;
             }
             else if (_flyCount > 1)
             {
-                _isFlyng = !MovementSystem.Instance.flying;
                 MovementSystem.Instance.ChangeFlight(!MovementSystem.Instance.flying);
                 _flyCount = 0;
                 _time = 0;

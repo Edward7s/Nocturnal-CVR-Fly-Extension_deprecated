@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using MelonLoader;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -15,9 +14,6 @@ using MelonLoader;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: MelonInfo(typeof(Nocturnal.Main), "Nocturnal Fly Extention", "1", "Edward7")]
-[assembly: MelonColor(System.ConsoleColor.DarkMagenta)]
-[assembly: MelonGame("Alpha Blend Interactive", "ChilloutVR")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from

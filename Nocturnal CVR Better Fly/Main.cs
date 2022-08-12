@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MelonLoader;
+using BepInEx;
 using UnityEngine;
 
 namespace Nocturnal
 {
-    public class Main : MelonMod
+    [BepInPlugin("org.bepinex.plugins.Nocturnal.Fly", "Nocturnal Fly Extention", "1.1.0.0")]
+    public class Main : BaseUnityPlugin
     {
-        public override void OnApplicationStart() => MelonCoroutines.Start(WaitForUi());      
+        public void Awake() => StartCoroutine(WaitForUi());      
         private static IEnumerator WaitForUi()
         {
             while (GameObject.Find("/Cohtml") == null)
