@@ -25,9 +25,9 @@ namespace Nocturnal
             if (MovementSystem.Instance.flying)
             {
                 if (Input.GetKey(KeyCode.Q))
-                    RootLogic.Instance.localPlayerRoot.transform.position -= RootLogic.Instance.localPlayerRoot.transform.up / (Input.GetKey(KeyCode.LeftShift) ? 20 : 50);
+                    RootLogic.Instance.localPlayerRoot.transform.position -= RootLogic.Instance.localPlayerRoot.transform.up / (CVRInputManager.Instance.sprint ? 20 : 50);
                 if (Input.GetKey(KeyCode.E))
-                    RootLogic.Instance.localPlayerRoot.transform.position += RootLogic.Instance.localPlayerRoot.transform.up / (Input.GetKey(KeyCode.LeftShift) ? 20 : 50);
+                    RootLogic.Instance.localPlayerRoot.transform.position += RootLogic.Instance.localPlayerRoot.transform.up / (CVRInputManager.Instance.sprint ? 20 : 50);
             }
             if (_flyCount == 0) return;
             _time += Time.smoothDeltaTime;
