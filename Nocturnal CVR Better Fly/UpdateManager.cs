@@ -16,17 +16,17 @@ namespace Nocturnal
         private bool _isToggled { get; set; } = true;
         void Update()
         {
-            if (CVRInputManager.Instance.jump && _isToggled)
+            if (CVRInputManager.Instance.jump && _isToggled && Main.jump.Value)
             {
                 _isToggled = false;
                 _flyCount++;
             }
-            else if (!CVRInputManager.Instance.jump) _isToggled = true;
-            if (MovementSystem.Instance.flying)
+            else if ((!CVRInputManager.Instance.jump)) _isToggled = true;
+            if (MovementSystem.Instance.flying && Main.keys.Value)
             {
-                if (Input.GetKey(KeyCode.Q))
+                if (Input.GetKey(Main.down.Value))
                     RootLogic.Instance.localPlayerRoot.transform.position -= RootLogic.Instance.localPlayerRoot.transform.up / (CVRInputManager.Instance.sprint ? 20 : 50);
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKey(Main.up.Value))
                     RootLogic.Instance.localPlayerRoot.transform.position += RootLogic.Instance.localPlayerRoot.transform.up / (CVRInputManager.Instance.sprint ? 20 : 50);
             }
             if (_flyCount == 0) return;

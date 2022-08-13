@@ -12,9 +12,20 @@ namespace Nocturnal
 #if ML
     using MelonLoader;
     public class Main : MelonMod
-    
     {
-        public override void OnApplicationStart() => MelonCoroutines.Start(WaitForUi());      
+        public static MelonPreferences_Entry<bool> jump;
+        public static MelonPreferences_Entry<bool> keys;
+        public static MelonPreferences_Entry<KeyCode> up;
+        public static MelonPreferences_Entry<KeyCode> down;
+        public override void OnApplicationStart()
+        {
+            MelonPreferences_Category Category = MelonPreferences.CreateCategory("NocturnalFly");
+            jump = Category.CreateEntry("DobbleJump", true);
+            keys = Category.CreateEntry("UpDownKeys", true);
+            up = Category.CreateEntry("UpKey", KeyCode.E);
+            down = Category.CreateEntry("DownKey", KeyCode.Q);
+            MelonCoroutines.Start(WaitForUi());
+        }
 #else
     using BepInEx;
     [BepInPlugin("org.bepinex.plugins.Nocturnal.Fly", "Nocturnal Fly Extention", "1.1.0.0")]
