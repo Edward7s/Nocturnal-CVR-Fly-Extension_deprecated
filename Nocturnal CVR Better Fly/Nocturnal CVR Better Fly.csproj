@@ -1,5 +1,9 @@
 ﻿<Project ToolsVersion="15.0">
 	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup Condition="'$(GameDir)'==''">
+		<GameDir Condition="Exists('A:\steam\steamapps\common\ChilloutVR\')">A:\steam\steamapps\common\ChilloutVR\</GameDir>
+		<GameDir Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\ChilloutVR\')">C:\Program Files (x86)\Steam\steamapps\common\ChilloutVR\</GameDir>
+	</PropertyGroup>
 	<PropertyGroup>
 		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,36 +12,29 @@
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<LangVersion>10.0</LangVersion>
 		<RootNamespace>Nocturnal</RootNamespace>
-		<AssemblyName>Nocturnal CVR Fly Extention</AssemblyName>
 		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
 		<FileAlignment>512</FileAlignment>
 		<Deterministic>true</Deterministic>
-		<ML Condition="'$(ML)'!='true'">false</ML>
+		<DefineConstants Condition="'$(ML)'=='true'">ML</DefineConstants>
 		<LoadPath Condition="'$(ML)'=='true'">Mods\</LoadPath>
 		<LoadPath Condition="'$(ML)'!='true'">BepInEx\plugins\</LoadPath>
 		<WarningLevel>4</WarningLevel>
 		<ErrorReport>prompt</ErrorReport>
+		<AssemblyName Condition="'$(ML)'=='true'">Nocturnal CVR Fly Extention ML</AssemblyName>
+		<AssemblyName Condition="'$(ML)'!='true'">Nocturnal CVR Fly Extention Bep</AssemblyName>
+		<OutputPath>bin\Build\</OutputPath>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(GameDir)'==''">
-		<GameDir Condition="Exists('A:\steam\steamapps\common\ChilloutVR\')">A:\steam\steamapps\common\ChilloutVR\</GameDir>
-		<GameDir Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\ChilloutVR\')">C:\Program Files (x86)\Steam\steamapps\common\ChilloutVR\</GameDir>
-	</PropertyGroup>
-	
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>full</DebugType>
 		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug\</OutputPath>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<DebugType>pdbonly</DebugType>
 		<Optimize>true</Optimize>
-		<OutputPath>bin\Release\</OutputPath>
 		<DefineConstants>TRACE</DefineConstants>
 	</PropertyGroup>
-	
 	<ItemGroup>
 		<Reference Include="MelonLoader" Condition="'$(ML)'=='true'">
 			<HintPath>$(GameDir)MelonLoader\MelonLoader.dll</HintPath>
@@ -271,6 +268,21 @@
 		<Reference Include="Valve.Newtonsoft.Json">
 			<HintPath>$(GameDir)ChilloutVR_Data\Managed\Valve.Newtonsoft.Json.dll</HintPath>
 		</Reference>
+		<Reference Include="SALSA-LipSync">
+			<HintPath>$(GameDir)ChilloutVR_Data\Managed\SALSA-LipSync.dll</HintPath>
+		</Reference>
+		<Reference Include="ShapesRuntime">
+			<HintPath>$(GameDir)ChilloutVR_Data\Managed\ShapesRuntime.dll</HintPath>
+		</Reference>
+		<Reference Include="SteamAudioUnity">
+			<HintPath>$(GameDir)ChilloutVR_Data\Managed\SteamAudioUnity.dll</HintPath>
+		</Reference>
+		<Reference Include="SteamVR">
+			<HintPath>$(GameDir)ChilloutVR_Data\Managed\SteamVR.dll</HintPath>
+		</Reference>
+		<Reference Include="SteamVR_Actions">
+			<HintPath>$(GameDir)ChilloutVR_Data\Managed\SteamVR_Actions.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="Main.cs" />
@@ -280,5 +292,6 @@
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)$(LoadPath)" />
+		<Message Text="Built and copied $(TargetFileName) to $(GameDir)$(LoadPath)" Importance="high" />
 	</Target>
 </Project>
