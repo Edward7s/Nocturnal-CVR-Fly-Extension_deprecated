@@ -28,10 +28,22 @@ namespace Nocturnal
         }
 #else
     using BepInEx;
+    using BepInEx.Configuration;
     [BepInPlugin("org.bepinex.plugins.Nocturnal.Fly", "Nocturnal Fly Extention", "1.1.0.0")]
     public class Main : BaseUnityPlugin
     {
-        public void Awake() => StartCoroutine(WaitForUi());
+        public static ConfigEntry<bool> jump;
+        public static ConfigEntry<bool> keys;
+        public static ConfigEntry<KeyCode> up;
+        public static ConfigEntry<KeyCode> down;
+        public void Awake()
+        {
+            jump = Config.Bind("Nocturnal.Fly", "Nocturnal.Fly.Jump", true);
+            keys = Config.Bind("Nocturnal.Fly", "Nocturnal.Fly.Keys", true);
+            up = Config.Bind("Nocturnal.Fly", "Nocturnal.Fly.Up", KeyCode.E);
+            down = Config.Bind("Nocturnal.Fly", "Nocturnal.Fly.Down", KeyCode.Q);
+            StartCoroutine(WaitForUi());
+        }
 #endif
         private static IEnumerator WaitForUi()
         {
