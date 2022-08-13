@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MelonLoader;
@@ -18,6 +19,7 @@ namespace Nocturnal
                 yield return null;
             new GameObject("Fly Extention N").AddComponent<UpdateManager>().gameObject.transform.parent = GameObject.Find("/Cohtml").transform;       
         }
+
     }
   
 }
